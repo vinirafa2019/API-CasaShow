@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymelaf-extras-springsecurity5"
+	layout:decorator="Layout">
+<head>
+<meta charset="UTF-8">
+
+<title>Casa de Show</title>
+</head>
+<section layout:fragment="conteudo">
+	<form method="post" action="/">
+		<div class="card text-center fundo" th:object="${evento}">
+			<div class="card-header alert alert-danger" th:if="${!#strings.isEmpty(mensagem)}">
+				<button type="button" class="close" data-dismiss="alert"></button>
+				<span th:text="${mensagem}"></span>
+			</div>
+				<div class="card-tittle">
+					<h1>Bem Vindo <span sec:authentication="principal.username"></span></h1>
+				</div>
+			<div class="list-group-item fundo" th:each="eventos: ${eventos}">
+				<img class="img-fluid" alt="responsive image" th:src="@{/home/imagem/{imagem}(imagem=${eventos.nomeImagem})}" width="450px">
+				<h5 th:text="${eventos.descricao}"></h5>
+				<h6 th:text="|Preço do ingresso: R$ ${{eventos.Valoringresso}}|"></h6>
+				<h6 th:text="|Data Do Evento ${{eventos.data}} |"></h6>
+				<h6 th:text="|Local Do Evento: ${eventos.endereco.nomecasa}|"></h6>
+				<h6 th:text="|Ingressos Restantes: ${eventos.qtddisponivel} |"></h6>
+				<a  type="submit"class="btn btn-primary" th:href="@{/adicionarCarrinho/{id}(id=${eventos.id})}">Comprar</a>
+			</div>
+				<h6 th:if="${#lists.isEmpty(eventos)}">Nenhum Evento Cadastrado</h6>
+		</div>
+	</form>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/funcoes.js"></script>
+</section>
+</html>
