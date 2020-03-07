@@ -23,8 +23,6 @@ public class ItensCompra {
 	@ManyToOne
 	private Evento even;
 	
-	@ManyToOne
-	private Compra compra;
 
 	@ApiModelProperty(example ="1")
 	@JsonInclude(Include.NON_NULL)
@@ -55,12 +53,6 @@ public class ItensCompra {
 	}
 	public void setEven(Evento even) {
 		this.even = even;
-	}
-	public Compra getCompra() {
-		return compra;
-	}
-	public void setCompra(Compra compra) {
-		this.compra = compra;
 	}
 	public int getQuantidade() {
 		return quantidade;

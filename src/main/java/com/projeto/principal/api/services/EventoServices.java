@@ -29,10 +29,7 @@ public class EventoServices {
 	}
 
 	public Evento salvar(Evento eventos) {
-		if(eventos.getId()==null) {
-			throw new ErroCadastraEventoEncontradoException("Evento nao pode ser cadastrado vazio");
-		}
-		
+
 		if(eventos.getId()!=null) {
 			Optional<Evento> a = eventorep.findById(eventos.getId());			
 			if(a.isPresent()) {

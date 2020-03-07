@@ -18,6 +18,7 @@ import com.projeto.principal.model.Evento;
 import com.projeto.principal.model.ItensCompra;
 import com.projeto.principal.model.Usuarios;
 import com.projeto.principal.repository.EventosRep;
+import com.projeto.principal.repository.ItenscompraRep;
 import com.projeto.principal.repository.UserRepository;
 
 @Controller
@@ -34,6 +35,8 @@ public class Carrinho {
 	@Autowired
 	private UserRepository usuarios;
 
+	@Autowired
+	private ItenscompraRep itenscomprados;
 
 
 	@RequestMapping("/carrinho")
@@ -79,7 +82,7 @@ public class Carrinho {
 				item.setQuantidade(item.getQuantidade() + 1);
 				item.setValortotal(item.getQuantidade() * item.getValorunitario());
 				itensCompra.add(item);
-
+				
 			}
 			mv.addObject("compraeventos", itensCompra);
 		} else {
@@ -108,7 +111,13 @@ public class Carrinho {
 			usuario = usuarios.buscarUsername(username).get(0);
 		}
 	}
-
+//	@RequestMapping("/historico")
+//	public ModelAndView comprarfim(@PathVariable Long id, ItensCompra comprados,RedirectAttributes attributess) {
+//		ModelAndView mv= new ModelAndView("Historico");
+//			itenscomprados.save(comprados);
+//			mv.addObject("compraeventos", itensCompra);	 
+//		return mv;		
+//	}
 
 
 	@RequestMapping("/historico/{id}")

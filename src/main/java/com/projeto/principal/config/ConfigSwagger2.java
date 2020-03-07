@@ -25,7 +25,7 @@ public class ConfigSwagger2 implements WebMvcConfigurer{
 				.apis(RequestHandlerSelectors.basePackage("com.projeto.principal.api.resources"))
 				.build()
 				.apiInfo(apiInfo());
-				//.tags(new Tag("Biblioteca","Autores e Livros"));
+				//.tags(new Tags("Casas","Eventos","Usuarios","Vendas"));
 	
 	
 	}		

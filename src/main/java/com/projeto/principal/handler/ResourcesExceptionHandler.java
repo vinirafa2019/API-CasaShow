@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.projeto.principal.exceptions.CasaJaExistenteEncontradaException;
 import com.projeto.principal.exceptions.CasaNaoEncontradaException;
 import com.projeto.principal.exceptions.CompraNaoEncontradaException;
 import com.projeto.principal.exceptions.ErroCadastraEventoEncontradoException;
@@ -32,7 +33,18 @@ public class ResourcesExceptionHandler {
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);		
 	}
-	
+	@ExceptionHandler(CasaJaExistenteEncontradaException.class)
+	public ResponseEntity<DetalhesErro>handleCasaJaExistenteEncontradaException
+					(CasaJaExistenteEncontradaException e, HttpServletRequest request){
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo("Casa já existente");
+		erro.setMensagemDesenvolvedor("http://errors.soceilbooks.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);		
+	}
 	
 	@ExceptionHandler(EventoExistenteException.class)
 	public ResponseEntity<DetalhesErro>handleEventoEventoExistenteException
